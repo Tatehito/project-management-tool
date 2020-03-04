@@ -10,5 +10,12 @@
   <%= @member.owner %>
 </p>
 
-<%= link_to 'Edit', edit_member_path(@member) %> |
-<%= link_to 'Back', members_path %>
+<%= link_to 'Back', root_path %>
+
+<br><br>
+
+<% if @member.owner %>
+  <%= link_to 'New Member', new_member_path %>
+  <br><br>
+  <%= link_to 'Edit Member', members_path %>
+<% end %>

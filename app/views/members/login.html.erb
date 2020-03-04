@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Edit</h1>
+<h1>Login</h1>
 
 <table>
   <thead>
@@ -16,8 +16,7 @@
       <tr>
         <td><%= member.name %></td>
         <td><%= member.owner %></td>
-        <td><%= link_to 'Edit', edit_member_path(member) %></td>
-        <td><%= link_to 'Destroy', member, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'login', member %></td>
       </tr>
     <% end %>
   </tbody>
