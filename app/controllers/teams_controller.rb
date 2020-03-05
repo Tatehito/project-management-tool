@@ -15,6 +15,7 @@ class TeamsController < ApplicationController
   # GET /teams/new
   def new
     @team = Team.new
+    @team.team_members.build
   end
 
   # GET /teams/1/edit
@@ -25,15 +26,11 @@ class TeamsController < ApplicationController
   # POST /teams.json
   def create
     @team = Team.new(team_params)
-
-    respond_to do |format|
-      if @team.save
-        format.html { redirect_to @team, notice: 'Team was successfully created.' }
-        format.json { render :show, status: :created, location: @team }
-      else
-        format.html { render :new }
-        format.json { render json: @team.errors, status: :unprocessable_entity }
-      end
+    @team.team_members.first.leader = true;
+    if @team.save
+      redirect_to @team, notice: 'Team was successfully created.'
+    else
+      render :new
     end
   end
 
@@ -62,13 +59,14 @@ class TeamsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_team
       @team = Team.find(params[:id])
+      @members = @team.members
+      @leader = TeamMember.find_by(team_id: @team.id, leader: true).member
     end
 
     # Only allow a list of trusted parameters through.
     def team_params
-      params.require(:team).permit(:name)
+      params.require(:team).permit(:name, team_members_attributes: [:member_id, :team_id, :leader])
     end
 end

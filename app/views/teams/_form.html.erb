@@ -12,8 +12,12 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name %>
+    <%= form.label "Team Name" %>
     <%= form.text_field :name %>
+    <%= form.fields_for :team_members do |m| %>
+      <%= m.label :Leader %>
+      <%= m.collection_select :member_id, Member.all, :id, :name, :include_blank => true %>
+    <% end %>
   </div>
 
   <div class="actions">

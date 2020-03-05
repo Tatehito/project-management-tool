@@ -1,8 +1,18 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
+  <strong>TeamName:</strong>
   <%= @team.name %>
+</p>
+<p>
+  <strong>Leader:</strong>
+  <%= @leader.name %>
+</p>
+<p>
+  <strong>Members:</strong>
+  <% @members.each do |m| %>
+    <%= m.name %>
+  <% end %>
 </p>
 
 <%= link_to 'Edit', edit_team_path(@team) %> |
