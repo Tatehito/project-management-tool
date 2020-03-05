@@ -3,6 +3,8 @@ class MembersController < ApplicationController
 
   def login
     @members = Member.all
+    # 疑似ログアウト
+    session.delete(:user_id)
   end
 
   # GET /members
@@ -14,6 +16,8 @@ class MembersController < ApplicationController
   # GET /members/1
   # GET /members/1.json
   def show
+    # 疑似ログイン
+    session[:user_id] = @member.id
   end
 
   # GET /members/new
