@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Team Member Edit</h1>
+
+<h2>Team</h2>
+<p><%= @team.name %></p>
+
+<h2>Leader</h2>
+<p><%= @team.leader.name %></p>
+
+<h2>Members</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Leader</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @team.members.each do |m| %>
+      <tr>
+        <td><%= m.name %></td>
+        <td><%= '○' if m.leader?(@team) %></td>
+        <td><%= link_to 'Destroy', m, method: :delete, data: { confirm: 'Are you sure?' } unless m.leader?(@team) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= form_with model: @new_member, url: team_members_add_path do |f| %>
+  <%= f.collection_select :member_id, @team.outside_members, :id, :name, {:include_blank => true} %>
+  <%= f.hidden_field :team_id, :value => @team.id %>
+  <%= submit_tag 'Add Team Member' %>
+<% end %>
+
+<br>
+<hr>
+
+<%= link_to 'Back', @team %>

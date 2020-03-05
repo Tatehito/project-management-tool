@@ -37,11 +37,10 @@ class TeamsController < ApplicationController
   # PATCH/PUT /teams/1
   # PATCH/PUT /teams/1.json
   def update
-      if @team.update(team_params)
-        redirect_to @team, notice: 'Team was successfully updated.'
-      else
-        render :edit
-      end
+    if @team.update(team_params)
+      redirect_to @team, notice: 'Team was successfully updated.'
+    else
+      render :edit
     end
   end
 
@@ -58,8 +57,6 @@ class TeamsController < ApplicationController
   private
     def set_team
       @team = Team.find(params[:id])
-      @members = @team.members
-      @leader = TeamMember.find_by(team_id: @team.id, leader: true).member
     end
 
     # Only allow a list of trusted parameters through.

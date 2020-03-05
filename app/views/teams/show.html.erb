@@ -1,19 +1,25 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>TeamName:</strong>
-  <%= @team.name %>
-</p>
-<p>
-  <strong>Leader:</strong>
-  <%= @leader.name %>
-</p>
-<p>
-  <strong>Members:</strong>
-  <% @members.each do |m| %>
-    <%= m.name %>
-  <% end %>
-</p>
+<h1>Team</h1>
 
-<%= link_to 'Edit', edit_team_path(@team) %> |
-<%= link_to 'Back', teams_path %>
+<h2>TeamName</h2>
+<p><%= @team.name %></p>
+
+<h2>Leader</h2>
+<p><%= @team.leader.name %></p>
+
+<h2>Members</h2>
+<ul>
+  <% @team.members.each do |m| %>
+    <li><%= m.name %></li>
+  <% end %>
+</ul>
+
+<% if @team.leader == current_user %>
+  <%= link_to 'Edit Team Member', "/team_members/#{@team.id}" %>
+<% end %>
+
+<br>
+<hr>
+
+<%= link_to 'Back', current_user %>

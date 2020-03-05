@@ -1,16 +1,24 @@
 <p id="notice"><%= notice %></p>
 
+
+<h2>氏名:</h2>
 <p>
-  <strong>Name:</strong>
   <%= @member.name %>
 </p>
 
-<p>
-  <strong>Owner:</strong>
-  <%= @member.owner %>
-</p>
+<h2>所属チーム:</h2>
 
-<%= link_to 'Back', root_path %>
+<ul>
+  <% @member.teams.each do |t| %>
+    <li><%= link_to t.name, t %></li>
+  <% end %>
+</ul>
+
+<br>
+<hr>
+<br>
+
+<%= link_to 'Logout', root_path %>
 
 <br><br>
 
