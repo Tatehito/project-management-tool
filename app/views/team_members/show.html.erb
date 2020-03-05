@@ -22,13 +22,13 @@
       <tr>
         <td><%= m.name %></td>
         <td><%= '○' if m.leader?(@team) %></td>
-        <td><%= link_to 'Destroy', m, method: :delete, data: { confirm: 'Are you sure?' } unless m.leader?(@team) %></td>
+        <td><%= link_to 'チームから外す', TeamMember.find_by(member_id: m.id, team_id: @team.id), method: :delete, data: { confirm: 'Are you sure?' } unless m.leader?(@team) %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= form_with model: @new_member, url: team_members_add_path do |f| %>
+<%= form_with model: @new_member do |f| %>
   <%= f.collection_select :member_id, @team.outside_members, :id, :name, {:include_blank => true} %>
   <%= f.hidden_field :team_id, :value => @team.id %>
   <%= submit_tag 'Add Team Member' %>
