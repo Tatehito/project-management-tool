@@ -28,7 +28,7 @@ class TeamsController < ApplicationController
     @team = Team.new(team_params)
     @team.team_members.first.leader = true;
     if @team.save
-      redirect_to @team, notice: 'Team was successfully created.'
+      redirect_to teams_path, notice: 'Team was successfully created.'
     else
       render :new
     end
@@ -43,7 +43,7 @@ class TeamsController < ApplicationController
     end
     
     if @team.save
-      redirect_to @team, notice: 'Team was successfully updated.'
+      redirect_to teams_path, notice: 'Team was successfully updated.'
     else
       render :edit
     end

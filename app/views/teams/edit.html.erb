@@ -14,8 +14,9 @@
   <% end %>
 
   <div class="field">
-    <%= form.label "Team Name" %>
+    <%= form.label "New Team Name" %>
     <%= form.text_field :name %>
+    <%= form.label "New Leader" %>
     <%= form.collection_select :leader_id, Member.all, :id, :name, :include_blank => true %>
   </div>
 
@@ -24,5 +25,6 @@
   </div>
 <% end %>
 
-<%= link_to 'Show', @team %> |
+<hr>
+
 <%= link_to 'Back', teams_path %>

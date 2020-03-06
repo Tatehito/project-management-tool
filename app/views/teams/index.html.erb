@@ -6,6 +6,7 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Leader</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,6 +15,7 @@
     <% @teams.each do |team| %>
       <tr>
         <td><%= team.name %></td>
+        <td><%= team.leader.name %></td>
         <td><%= link_to 'Edit', edit_team_path(team) %></td>
         <td><%= link_to 'Destroy', team, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
@@ -24,3 +26,7 @@
 <br>
 
 <%= link_to 'New Team', new_team_path %>
+
+<hr>
+
+<%= link_to 'Back', current_user %>

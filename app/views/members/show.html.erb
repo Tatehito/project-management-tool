@@ -1,13 +1,15 @@
 <p id="notice"><%= notice %></p>
 
+<h1>TopPage</h1>
 
-<h2>氏名:</h2>
+<br>
+
+<h2>Name</h2>
 <p>
   <%= @member.name %>
 </p>
 
-<h2>所属チーム:</h2>
-
+<h2>Affiliation Teams</h2>
 <ul>
   <% @member.teams.each do |t| %>
     <li><%= link_to t.name, t %></li>
@@ -18,14 +20,11 @@
 <hr>
 <br>
 
-<%= link_to 'Logout', root_path %>
-
-<br><br>
-
 <% if @member.owner %>
-  <%= link_to 'New Member', new_member_path %>
   <%= link_to 'Edit Member', members_path %>
   <br><br>
-  <%= link_to 'New Team', new_team_path %>
   <%= link_to 'Edit Team', teams_path %>
+  <br><br>
 <% end %>
+
+<%= link_to 'Logout', root_path %>
