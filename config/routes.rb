@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   resources :members
   resources :team_members
   resources :rooms
+  resources :meetings
 end
