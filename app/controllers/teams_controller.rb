@@ -34,10 +34,15 @@ class TeamsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /teams/1
-  # PATCH/PUT /teams/1.json
   def update
-    if @team.update(team_params)
+    new_leader_id = params[:team][:leader_id]
+    @team.name = params[:team][:name]
+    @team.team_members = @team.update_leader(new_leader_id)
+    unless @team.exists_leader?
+      @team.team_members.new(member_id: new_leader_id, leader: true)
+    end
+    
+    if @team.save
       redirect_to @team, notice: 'Team was successfully updated.'
     else
       render :edit
@@ -61,6 +66,6 @@ class TeamsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def team_params
-      params.require(:team).permit(:name, team_members_attributes: [:member_id, :team_id, :leader])
+      params.require(:team).permit(:name, team_members_attributes: [:id, :member_id, :team_id, :leader])
     end
 end
