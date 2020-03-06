@@ -7,5 +7,6 @@ Rails.application.routes.draw do
   resources :rooms
   
   resources :meetings
+  get 'meetings/new/:id', to: 'meetings#new'
   resources :meeting_members
 end

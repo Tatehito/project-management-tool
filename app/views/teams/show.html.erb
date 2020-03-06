@@ -2,23 +2,66 @@
 
 <h1>Team</h1>
 
+<br>
+
 <h2>TeamName</h2>
 <p><%= @team.name %></p>
+
+<br>
 
 <h2>Leader</h2>
 <p><%= @team.leader.name %></p>
 
+<br>
+
 <h2>Members</h2>
-<ul>
-  <% @team.members.each do |m| %>
-    <li><%= m.name %></li>
-  <% end %>
-</ul>
+<table>
+  <tbody>
+    <% @team.members.each do |m| %>
+      <tr>
+        <td><%= m.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <% if @team.leader == current_user %>
   <%= link_to 'Edit Team Member', "/team_members/#{@team.id}" %>
 <% end %>
 
+<br>
+
+<h2>Meetings</h2>
+<% if @team.meetings.size > 0 %>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Start</th>
+        <th>End</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+    <tbody>
+        <% @team.meetings.each do |meeting| %>
+          <tr>
+            <td><%= meeting.name %></td>
+            <td><%= meeting.start %></td>
+            <td><%= meeting.end %></td>
+            <td><%= link_to 'Edit', "/team_members/#{meeting.id}" %></td>
+          </tr>
+        <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>開催中のミーティングはありません.</p>
+<% end %>
+
+<br>
+
+<td><%= link_to 'New Team Meeting', "/meetings/new/#{@team.id}" %></td>
+
+<br>
 <br>
 <hr>
 

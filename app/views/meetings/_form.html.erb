@@ -13,17 +13,18 @@
 
   <div class="field">
     <%= form.label :team_id %>
-    <%= form.text_field :team_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :room_id %>
-    <%= form.text_field :room_id %>
+    <%= form.hidden_field :team_id, value: meeting.team.id %>
+    <%= meeting.team.name %>
   </div>
 
   <div class="field">
     <%= form.label :name %>
     <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :room_id %>
+    <%= form.collection_select :room_id, Room.all, :id, :name, :include_blank => true %>
   </div>
 
   <div class="field">

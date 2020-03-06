@@ -1,29 +1,30 @@
 <p id="notice"><%= notice %></p>
 
+
+<h2>Team</h2>
 <p>
-  <strong>Team:</strong>
-  <%= @meeting.team_id %>
+  <%= @meeting.team.name %>
 </p>
 
+<h2>Name</h2>
 <p>
-  <strong>Room:</strong>
-  <%= @meeting.room_id %>
-</p>
-
-<p>
-  <strong>Name:</strong>
   <%= @meeting.name %>
 </p>
 
+<h2>Room</h2>
 <p>
-  <strong>Start:</strong>
+  <%= @meeting.room.name %>
+</p>
+
+<h2>Start:</h2>
+<p>
   <%= @meeting.start %>
 </p>
 
+<h2>End:</h2>
 <p>
-  <strong>End:</strong>
   <%= @meeting.end %>
 </p>
 
-<%= link_to 'Edit', edit_meeting_path(@meeting) %> |
-<%= link_to 'Back', meetings_path %>
+<%= link_to 'Add Member', edit_meeting_path(@meeting) %> |
+<%= link_to 'Back', @meeting.team %>

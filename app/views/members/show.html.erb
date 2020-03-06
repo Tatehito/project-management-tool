@@ -9,12 +9,18 @@
   <%= @member.name %>
 </p>
 
+<br>
+
 <h2>Affiliation Teams</h2>
-<ul>
-  <% @member.teams.each do |t| %>
-    <li><%= link_to t.name, t %></li>
-  <% end %>
-</ul>
+<table>
+  <tbody>
+    <% @member.teams.each do |t| %>
+      <tr>
+        <td><%= link_to t.name, t %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <br>
 <hr>
