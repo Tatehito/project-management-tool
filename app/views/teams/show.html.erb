@@ -48,7 +48,7 @@
             <td><%= meeting.name %></td>
             <td><%= meeting.start %></td>
             <td><%= meeting.end %></td>
-            <td><%= link_to 'Edit', "/team_members/#{meeting.id}" %></td>
+            <td><%= link_to 'Edit or Add Member', edit_meeting_path(meeting) %></td>
           </tr>
         <% end %>
     </tbody>
