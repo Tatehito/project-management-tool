@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_06_141359) do
+ActiveRecord::Schema.define(version: 2020_03_07_055839) do
 
   create_table "meeting_members", force: :cascade do |t|
     t.integer "member_id", null: false
@@ -26,8 +26,8 @@ ActiveRecord::Schema.define(version: 2020_03_06_141359) do
     t.integer "team_id", null: false
     t.integer "room_id", null: false
     t.string "name"
-    t.date "start"
-    t.date "end"
+    t.datetime "start"
+    t.datetime "end"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["room_id"], name: "index_meetings_on_room_id"
