@@ -2,6 +2,82 @@
 
 <h1>Editing Meeting</h1>
 
-<%= render 'form', meeting: @meeting %>
+<%= form_with(model: @meeting, local: true) do |form| %>
+  <% if @meeting.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@meeting.errors.count, "error") %> prohibited this meeting from being saved:</h2>
+
+      <ul>
+        <% @meeting.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :team_id %>
+    <%= form.hidden_field :team_id, value: @meeting.team.id %>
+    <%= @meeting.team.name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :room_id %>
+    <%= form.collection_select :room_id, Room.all, :id, :name, :include_blank => true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :start %>
+    <%= form.datetime_select :start %>
+  </div>
+
+  <div class="field">
+    <%= form.label :end %>
+    <%= form.datetime_select :end %>
+  </div>
+
+  <br>
+
+  <h2>Members</h2>
+  <% if @meeting.members.size > 0 %>
+    <table>
+      <thead>
+        <th>Name</th>
+        <th>Organizer</th>
+        <th></th>
+      </thead>
+      <tbody>
+        <% @meeting.members.each do |m| %>
+          <tr>
+            <td><%= m.name %></td>
+            <td><%= m.organizer?(@meeting) ? '○' : '' %></td>
+            <td><%= link_to '会議から外す（ユーザーが消えてしまうバグあり）', m, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>このミーティングに参加予定のメンバーはいません.</p>
+  <% end %>
+  <br>
+
+  <div class="field">
+    Join New Member：<%= form.collection_select :member_id, @meeting.team.members, :id, :name, {:include_blank => true} %>
+  </div>
+
+  <br>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<br>
+<hr>
 
 <%= link_to 'Back', @meeting.team %>

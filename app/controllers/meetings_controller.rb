@@ -26,10 +26,11 @@ class MeetingsController < ApplicationController
   # POST /meetings.json
   def create
     @meeting = Meeting.new(meeting_params)
+    @meeting.meeting_members << MeetingMember.new(member_id: @meeting.team.leader.id, meeting_id: @meeting.id, organizer: true)
     if @meeting.save
-      redirect_to @meeting, notice: 'Meeting was successfully created.'
+      redirect_to edit_meeting_path(@meeting), notice: 'Meeting was successfully created.'
     else
-      ender :new
+      render :new
     end
   end
 

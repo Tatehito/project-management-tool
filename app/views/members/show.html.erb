@@ -23,6 +23,32 @@
 </table>
 
 <br>
+
+<h2>Upcoming meetings</h2>
+<% if @member.meetings.size > 0 %>
+  <table>
+    <thead>
+      <th>Name</th>
+      <th>Team</th>
+      <th>Start</th>
+      <th>End</th>
+    </thead>
+    <tbody>
+      <% @member.meetings.each do |m| %>
+        <tr>
+          <td><%= link_to m.name, edit_meeting_path(m) %></td>
+          <td><%= m.team.name %></td>
+          <td><%= m.start %></td>
+          <td><%= m.end %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>参加予定のミーティングはありません.</p>
+<% end %>
+
+<br>
 <hr>
 <br>
 

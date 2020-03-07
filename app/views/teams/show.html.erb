@@ -25,11 +25,12 @@
   </tbody>
 </table>
 
+<br>
+
 <% if @team.leader == current_user %>
   <%= link_to 'Edit Team Member', "/team_members/#{@team.id}" %>
+  <br>
 <% end %>
-
-<br>
 
 <h2>Meetings</h2>
 <% if @team.meetings.size > 0 %>
