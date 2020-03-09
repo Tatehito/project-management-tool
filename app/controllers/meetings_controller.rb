@@ -37,6 +37,7 @@ class MeetingsController < ApplicationController
   # PATCH/PUT /meetings/1
   # PATCH/PUT /meetings/1.json
   def update
+    @meeting.members << Member.find(params[:new_member][:id])
     if @meeting.update(meeting_params)
       redirect_to edit_meeting_path, notice: 'Meeting was successfully updated.'
     else

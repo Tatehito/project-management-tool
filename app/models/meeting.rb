@@ -10,4 +10,8 @@ class Meeting < ApplicationRecord
       return m.member if m.organizer
     end
   end
+
+  def outside_members
+    team.members.where.not(id: meeting_members.select("member_id"))
+  end
 end

@@ -67,7 +67,7 @@
   <br>
 
   <div class="field">
-    Join New Member：<%= form.collection_select :member_id, @meeting.team.members, :id, :name, {:include_blank => true} %>
+    Join New Member：<%= collection_select :new_member, :id, @meeting.outside_members, :id, :name, {:include_blank => true} %>
   </div>
 
   <br>
