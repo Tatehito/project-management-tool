@@ -52,11 +52,15 @@
         <th></th>
       </thead>
       <tbody>
-        <% @meeting.members.each do |m| %>
+        <% @meeting.meeting_members.each do |m| %>
           <tr>
-            <td><%= m.name %></td>
-            <td><%= m.organizer?(@meeting) ? '○' : '' %></td>
-            <td><%= link_to '会議から外す（ユーザーが消えてしまうバグあり）', m, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td><%= m.member.name %></td>
+            <td><%= m.member.organizer?(@meeting) ? '○' : '' %></td>
+            <td>
+              <% unless m.member.organizer?(@meeting) %>
+                <%= link_to '会議から外す', m, method: :delete, data: { confirm: 'Are you sure?' } %>
+              <% end %>
+            </td>
           </tr>
         <% end %>
       </tbody>
@@ -64,13 +68,15 @@
   <% else %>
     <p>このミーティングに参加予定のメンバーはいません.</p>
   <% end %>
-  <br>
-
-  <div class="field">
-    Join New Member：<%= collection_select :new_member, :id, @meeting.outside_members, :id, :name, {:include_blank => true} %>
-  </div>
 
   <br>
+
+  <% unless @meeting.members.size == @meeting.team.members.size %>
+    <div class="field">
+      Join New Member：<%= collection_select :new_member, :id, @meeting.outside_members, :id, :name, {:include_blank => true} %>
+    </div>
+    <br>
+  <% end %>
 
   <div class="actions">
     <%= form.submit %>

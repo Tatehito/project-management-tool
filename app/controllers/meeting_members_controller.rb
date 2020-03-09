@@ -55,10 +55,7 @@ class MeetingMembersController < ApplicationController
   # DELETE /meeting_members/1.json
   def destroy
     @meeting_member.destroy
-    respond_to do |format|
-      format.html { redirect_to meeting_members_url, notice: 'Meeting member was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to edit_meeting_path(@meeting_member.meeting_id), notice: 'Meeting member was successfully destroyed.'
   end
 
   private
