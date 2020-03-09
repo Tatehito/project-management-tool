@@ -81,9 +81,15 @@
   <div class="actions">
     <%= form.submit %>
   </div>
+
+  <br>
+
+  <% if current_user.organizer?(@meeting) %>
+    <%= link_to 'Cancel Meeting', @meeting, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <br>
+  <% end %>
 <% end %>
 
-<br>
 <hr>
 
 <%= link_to 'Back', @meeting.team %>

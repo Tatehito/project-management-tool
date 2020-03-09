@@ -49,7 +49,7 @@ class MeetingsController < ApplicationController
   # DELETE /meetings/1.json
   def destroy
     @meeting.destroy
-    redirect_to meetings_url, notice: 'Meeting was successfully destroyed.'
+    redirect_to @meeting.team, notice: 'Meeting was successfully destroyed.'
   end
 
   private
