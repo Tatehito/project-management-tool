@@ -46,7 +46,7 @@ class TeamsController < ApplicationController
     end
     
     if @team.save
-      redirect_to teams_path, notice: 'Team was successfully updated.'
+      redirect_to teams_path, notice: 'チームを更新しました。'
     else
       render :edit
     end

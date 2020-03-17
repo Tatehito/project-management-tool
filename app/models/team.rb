@@ -10,4 +10,18 @@ class Team < ApplicationRecord
   def leader
     TeamMember.find_by(team_id: id, leader: true).member
   end
+
+  def update_leader(new_leader_id)
+    team_members.map do |m|
+      m.leader = m.member_id.to_s == new_leader_id
+      m
+    end
+  end
+
+  def exists_leader?
+    team_members.each do |m|
+      return true if m.leader
+    end
+    return false
+  end
 end

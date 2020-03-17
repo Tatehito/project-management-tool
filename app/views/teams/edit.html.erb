@@ -1,0 +1,36 @@
+<h1>チーム編集</h1>
+
+<%= form_with(model: @team, local: true) do |form| %>
+  <% if @team.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@team.errors.count, "error") %> prohibited this team from being saved:</h2>
+
+      <ul>
+        <% @team.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label "チーム名" %>
+    <%= form.text_field :name %>
+  </div>
+  
+  <div class="field">
+    <%= form.label "リーダー" %>
+    <%= form.collection_select :leader_id, Member.all, :id, :name, :include_blank => true %>
+  </div>
+
+  <br>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<br>
+<hr>
+
+<%= link_to '戻る', teams_path %>
