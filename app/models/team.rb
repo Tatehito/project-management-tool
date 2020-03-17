@@ -11,6 +11,10 @@ class Team < ApplicationRecord
     TeamMember.find_by(team_id: id, leader: true).member
   end
 
+  def outside_members
+    Member.where.not(id: TeamMember.where(team_id: id).select("team_members.member_id"))
+  end
+
   def update_leader(new_leader_id)
     team_members.map do |m|
       m.leader = m.member_id.to_s == new_leader_id

@@ -1,5 +1,5 @@
 class TeamsController < ApplicationController
-  before_action :set_team, only: [:show, :edit, :update, :destroy, :members, :destroy_member]
+  before_action :set_team, only: [:show, :edit, :update, :destroy, :members, :add_member, :destroy_member]
 
   # チーム一覧画面表示
   def index
@@ -60,9 +60,9 @@ class TeamsController < ApplicationController
 
   # チームメンバー追加
   def add_member
-    @team.team_member << TeamMember.new(team_member_params)
+    @team.team_members << TeamMember.new(member_id: params[:member_id])
     if @team.save
-      redirect_to action: 'show', id: new_member.team_id
+      redirect_to members_team_path, notice: 'メンバーを追加しました。'
     end
   end
 

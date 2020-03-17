@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     member do
       get :members
       delete :member, to: 'teams#destroy_member'
+      post :member, to: 'teams#add_member'
     end
   end
   
