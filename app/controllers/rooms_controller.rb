@@ -37,10 +37,7 @@ class RoomsController < ApplicationController
   # 会議室廃止
   def destroy
     @room.destroy
-    respond_to do |format|
-      format.html { redirect_to rooms_url, notice: '会議室を廃止しました。' }
-      format.json { head :no_content }
-    end
+    redirect_to rooms_url, notice: '会議室を廃止しました。'
   end
 
   private
