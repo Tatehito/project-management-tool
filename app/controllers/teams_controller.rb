@@ -30,7 +30,7 @@ class TeamsController < ApplicationController
     @team = Team.new(team_params)
     @team.team_members.first.leader = true;
     if @team.save
-      redirect_to teams_path, notice: 'Team was successfully created.'
+      redirect_to teams_path, notice: 'チームを作成しました。'
     else
       render :new
     end
