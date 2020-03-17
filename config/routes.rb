@@ -8,6 +8,6 @@ Rails.application.routes.draw do
       post :member, to: 'teams#add_member'
     end
   end
-  
+  resources :rooms
   resources :meetings, only: [:show, :edit]
 end
