@@ -1,0 +1,58 @@
+<p id="notice"><%= notice %></p>
+
+<h1>トップページ</h1>
+
+<h2>名前</h2>
+<p>
+  <%= @member.name %>
+</p>
+
+<br>
+
+<h2>所属チーム</h2>
+<table>
+  <tbody>
+    <% @member.teams.each do |t| %>
+      <tr>
+        <td><%= link_to t.name, t %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<h2>予定されている会議</h2>
+<% if @member.meetings.size > 0 %>
+  <table>
+    <thead>
+      <th>Name</th>
+      <th>Team</th>
+      <th>Start</th>
+      <th>End</th>
+    </thead>
+    <tbody>
+      <% @member.meetings.each do |m| %>
+        <tr>
+          <td><%= link_to m.name, edit_meeting_path(m) %></td>
+          <td><%= m.team.name %></td>
+          <td><%= m.start %></td>
+          <td><%= m.end %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>参加予定のミーティングはありません。</p>
+<% end %>
+
+<br>
+<hr>
+<br>
+
+<% if @member.owner %>
+  <%= link_to 'メンバー管理画面へ', members_path %>
+  <br><br>
+<% end %>
+
+<%= link_to 'ログアウト', root_path %>

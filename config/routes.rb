@@ -1,4 +1,4 @@
 Rails.application.routes.draw do
-  root 'members#index'
+  root 'login#index'
   resources :members
 end
