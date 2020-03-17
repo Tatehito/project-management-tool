@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<h1>メンバー管理</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Owner</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @members.each do |member| %>
+      <tr>
+        <td><%= member.name %></td>
+        <td><%= member.owner %></td>
+        <td><%= link_to '編集', edit_member_path(member) %></td>
+        <td><%= link_to '削除', member, method: :delete, data: { confirm: 'メンバーを削除してよろしいですか？' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to '新しいメンバーを追加する', new_member_path %>
+
+<br>
+<br>
+<hr>
+
+<p>戻る</p>
