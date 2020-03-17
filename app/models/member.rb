@@ -15,4 +15,8 @@ class Member < ApplicationRecord
       team.leader == self
     end
   end
+
+  def organizer?(meeting)
+    meeting.organizer == self
+  end
 end
