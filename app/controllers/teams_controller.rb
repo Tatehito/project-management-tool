@@ -55,10 +55,7 @@ class TeamsController < ApplicationController
   # チーム削除
   def destroy
     @team.destroy
-    respond_to do |format|
-      format.html { redirect_to teams_url, notice: 'Team was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to teams_url, notice: 'チームを削除しました。'
   end
 
   # チームメンバー追加

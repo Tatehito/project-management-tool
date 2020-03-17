@@ -17,7 +17,7 @@
         <td><%= team.name %></td>
         <td><%= team.leader.name %></td>
         <td><%= link_to '編集', edit_team_path(team) %></td>
-        <td><%= link_to '削除', team, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to '削除', team, method: :delete, data: { confirm: 'チームを削除してよろしいですか?' } %></td>
       </tr>
     <% end %>
   </tbody>
