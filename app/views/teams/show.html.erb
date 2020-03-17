@@ -1,0 +1,66 @@
+<p id="notice"><%= notice %></p>
+
+<h1>チーム</h1>
+
+<h2>チーム名</h2>
+<p><%= @team.name %></p>
+
+<br>
+
+<h2>チームメンバー</h2>
+<table>
+  <thead>
+    <th>Name</th>
+    <th>Leader</th>
+  </thead>
+  <tbody>
+    <% @team.members.each do |m| %>
+      <tr>
+        <td><%= m.name %></td>
+        <td><%= '○' if m.leader?(@team) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<% if @team.leader == current_user %>
+  <%= link_to 'チームメンバー管理画面へ', "/team_members/#{@team.id}" %>
+  <br>
+  <br>
+<% end %>
+
+<h2>開催予定のミーティング</h2>
+<% if @team.meetings.size > 0 %>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Start</th>
+        <th>End</th>
+      </tr>
+    </thead>
+    <tbody>
+        <% @team.meetings.each do |meeting| %>
+          <tr>
+            <td><%= link_to meeting.name, edit_meeting_path(meeting) %></td>
+            <td><%= meeting.start %></td>
+            <td><%= meeting.end %></td>
+          </tr>
+        <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>開催中のミーティングはありません.</p>
+<% end %>
+
+<br>
+
+<td><%= link_to 'ミーティングを開催する', "/meetings/new/#{@team.id}" %></td>
+
+<br>
+<br>
+<hr>
+
+<%= link_to '戻る', current_user %>
