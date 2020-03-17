@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<h1>チーム管理</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Leader</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @teams.each do |team| %>
+      <tr>
+        <td><%= team.name %></td>
+        <td><%= team.leader.name %></td>
+        <td><%= link_to '編集', edit_team_path(team) %></td>
+        <td><%= link_to '削除', team, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to '新しいチームをつくる', new_team_path %>
+
+<hr>
+
+<%= link_to '戻る', current_user %>

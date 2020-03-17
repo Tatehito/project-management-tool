@@ -6,4 +6,8 @@ class Team < ApplicationRecord
   has_many :meetings, dependent: :destroy
 
   validates :name, presence: true
+
+  def leader
+    TeamMember.find_by(team_id: id, leader: true).member
+  end
 end
