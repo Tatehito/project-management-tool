@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<h1>チームメンバー管理</h1>
+
+<h2>チーム名</h2>
+<p><%= @team.name %></p>
+
+<h2>チームメンバー</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Leader</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @team.members.each do |m| %>
+      <tr>
+        <td><%= m.name %></td>
+        <td><%= '○' if m.leader?(@team) %></td>
+        <td><%= 'チームから外す' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p>チームメンバーを追加する</p>
+
+<hr>
+
+<%= link_to '戻る', @team %>

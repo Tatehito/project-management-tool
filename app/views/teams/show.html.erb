@@ -26,7 +26,7 @@
 <br>
 
 <% if @team.leader == current_user %>
-  <%= link_to 'チームメンバー管理画面へ', "/team_members/#{@team.id}" %>
+  <%= link_to 'チームメンバー管理画面へ', members_team_path %>
   <br>
   <br>
 <% end %>
