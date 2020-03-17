@@ -45,7 +45,7 @@ class MembersController < ApplicationController
       @member.destroy
       redirect_to members_url, notice: 'メンバーを削除しました。'
     else
-      redirect_to members_url, notice: 'リーダーは削除できません.'
+      redirect_to members_url, notice: 'リーダーは削除できません。'
     end
   end
 
