@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :teams do
     member do
       get :members
+      delete :member, to: 'teams#destroy_member'
     end
   end
   

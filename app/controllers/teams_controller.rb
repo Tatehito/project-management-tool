@@ -1,5 +1,5 @@
 class TeamsController < ApplicationController
-  before_action :set_team, only: [:show, :edit, :update, :destroy, :members]
+  before_action :set_team, only: [:show, :edit, :update, :destroy, :members, :destroy_member]
 
   # チーム一覧画面表示
   def index
@@ -68,8 +68,9 @@ class TeamsController < ApplicationController
 
   # チームメンバー削除
   def destroy_member
+    @team_member = @team.team_members.find_by(member_id: params[:member_id])
     @team_member.destroy
-    redirect_to action: 'show', id: @team_member.team_id
+    redirect_to members_team_path, notice: 'メンバーを削除しました。'
   end
 
   private

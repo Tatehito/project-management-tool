@@ -19,7 +19,7 @@
       <tr>
         <td><%= m.name %></td>
         <td><%= '○' if m.leader?(@team) %></td>
-        <td><%= 'チームから外す' %></td>
+        <td><%= button_to 'チームから外す', member_team_path(member_id: m.id), method: :delete unless m.leader?(@team) %></td>
       </tr>
     <% end %>
   </tbody>
