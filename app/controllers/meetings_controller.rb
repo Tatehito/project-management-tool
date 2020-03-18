@@ -1,5 +1,5 @@
 class MeetingsController < ApplicationController
-  before_action :set_meeting, only: [:show, :edit, :update, :destroy, :add_member]
+  before_action :set_meeting, only: [:show, :edit, :update, :destroy, :add_member, :destroy_member]
 
   # ミーティング追加画面表示
   def new
@@ -41,6 +41,9 @@ class MeetingsController < ApplicationController
 
   # ミーティング参加メンバー削除
   def destroy_member
+    @member = @meeting.meeting_members.find_by(member_id: params[:member_id])
+    @member.destroy
+    redirect_to edit_team_meeting_path, notice: '参加メンバーを削除しました。'
   end
 
   # ミーティング幹事変更

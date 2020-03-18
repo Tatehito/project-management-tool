@@ -53,12 +53,12 @@
         <th></th>
       </thead>
       <tbody>
-        <% @meeting.meeting_members.each do |m| %>
+        <% @meeting.members.each do |m| %>
           <tr>
-            <td><%= m.member.name %></td>
-            <td><%= m.member.organizer?(@meeting) ? '○' : '' %></td>
-            <% unless m.member.organizer?(@meeting) %>
-              <td>会議から外す</td>
+            <td><%= m.name %></td>
+            <td><%= m.organizer?(@meeting) ? '○' : '' %></td>
+            <% unless m.organizer?(@meeting) %>
+              <td><%= button_to '会議から外す', member_team_meeting_path(member_id: m.id), method: :delete %></td>
               <td>幹事にする</td>
             <% end %>
           </tr>
