@@ -1,5 +1,5 @@
 class MeetingsController < ApplicationController
-  before_action :set_meeting, only: [:show, :edit, :update, :destroy]
+  before_action :set_meeting, only: [:show, :edit, :update, :destroy, :add_member]
 
   # ミーティング追加画面表示
   def new
@@ -32,8 +32,8 @@ class MeetingsController < ApplicationController
   def add_member
     new_member_id = params[:new_member][:id]
     @meeting.members << Member.find(new_member_id) if new_member_id.present?
-    if @meeting.update(meeting_params)
-      redirect_to edit_meeting_path, notice: 'Meeting was successfully updated.'
+    if @meeting.save
+      redirect_to edit_team_meeting_path, notice: '参加メンバーを追加しました。'
     else
       render :edit
     end

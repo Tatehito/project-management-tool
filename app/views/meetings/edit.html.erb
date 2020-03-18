@@ -43,8 +43,7 @@
 
   <br>
 
-  <h2>参加メンバー</h2>
-<%= form_with(model: @meeting, local: true) do |form| %>
+<h2>参加メンバー</h2>
   <% if @meeting.members.size > 0 %>
     <table>
       <thead>
@@ -72,13 +71,14 @@
 
   <br>
 
+<%= form_with(url: member_team_meeting_path(@meeting.team.id), local: true) do |form| %>
   <% unless @meeting.members.size >= @meeting.room.capacity %>
     <div class="field">
       <%= collection_select :new_member, :id, @meeting.outside_members, :id, :name, {:include_blank => true} %> <%= form.submit '参加者を追加する'%>
     </div>
     <br>
   <% else %>
-    <p>会議室「<%= @meeting.room.name %>」の定員に達したため、これ以上参加者を追加できません.</p>
+    <p>会議室「<%= @meeting.room.name %>」の定員に達したため、これ以上参加者を追加できません。</p>
   <% end %>
   <br>
 <% end %>

@@ -7,7 +7,11 @@ Rails.application.routes.draw do
       delete :member, to: 'teams#destroy_member'
       post :member, to: 'teams#add_member'
     end
-    resources :meetings
+    resources :meetings do
+      member do
+        post :member, to: 'meetings#add_member'
+      end
+    end
   end
   resources :meetings
   resources :rooms
