@@ -48,12 +48,14 @@ class MeetingsController < ApplicationController
 
   # ミーティング幹事変更
   def change_organizer
-    @meeting.meeting_members = @meeting.update_organizer(params[:id])
-    if @meeting.update(meeting_params)
-      redirect_to edit_team_meeting_path, notice: '幹事を変更しました。'
-    else
-      render :edit
+    meeting_members = MeetingMember.where(meeting_id: params[:id])
+    old_organizer = meeting_members.find_by(organizer: true)
+    new_organizer = meeting_members.find_by(member_id: params[:member_id])
+    ActiveRecord::Base.transaction do
+      old_organizer.update_attributes!(organizer: false)
+      new_organizer.update_attributes!(organizer: true)
     end
+    redirect_to edit_team_meeting_path, notice: '幹事を変更しました。'
   end
 
   private

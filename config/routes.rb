@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :meetings do
       member do
         post :member, to: 'meetings#add_member'
+        post :change_organizer
         delete :member, to: 'meetings#destroy_member'
       end
     end

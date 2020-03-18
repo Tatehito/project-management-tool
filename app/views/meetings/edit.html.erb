@@ -59,7 +59,7 @@
             <td><%= m.organizer?(@meeting) ? '○' : '' %></td>
             <% unless m.organizer?(@meeting) %>
               <td><%= button_to '会議から外す', member_team_meeting_path(member_id: m.id), method: :delete %></td>
-              <td>幹事にする</td>
+              <td><%= button_to '幹事にする', change_organizer_team_meeting_path(member_id: m.id), method: :post %></td>
             <% end %>
           </tr>
         <% end %>
