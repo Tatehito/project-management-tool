@@ -34,7 +34,7 @@ class MeetingsController < ApplicationController
   # ミーティングキャンセル
   def destroy
     @meeting.destroy
-    redirect_to @meeting.team, notice: 'Meeting was successfully destroyed.'
+    redirect_to @meeting.team, notice: 'ミーティングをキャンセルしました。'
   end
 
   # ミーティング参加メンバー追加
