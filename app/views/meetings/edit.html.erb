@@ -1,5 +1,16 @@
 <p id="notice"><%= notice %></p>
 
+<% if @meeting.errors.any? %>
+      <div id="error_explanation">
+        <p>ミーティングの編集に失敗しました。</p>
+        <ul>
+          <% @meeting.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+  <% end %>
+
 <h1>ミーティング編集</h1>
 
 <h2>概要</h2>
@@ -21,13 +32,13 @@
   </div>
 
   <div class="field">
-    <%= form.label :start %>
-    <%= form.datetime_select :start %>
+    <%= form.label :start_time %>
+    <%= form.datetime_select :start_time %>
   </div>
 
   <div class="field">
-    <%= form.label :end %>
-    <%= form.datetime_select :end %>
+    <%= form.label :end_time %>
+    <%= form.datetime_select :end_time %>
   </div>
 
   <br>

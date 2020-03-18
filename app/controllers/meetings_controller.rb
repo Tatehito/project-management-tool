@@ -27,7 +27,7 @@ class MeetingsController < ApplicationController
     if @meeting.update(meeting_params)
       redirect_to edit_team_meeting_path, notice: 'ミーティングを編集しました。'
     else 
-      redirect_to edit_team_meeting_path, notice: 'ミーティングの編集に失敗しました。'
+      render :edit
     end
   end
 
@@ -73,6 +73,6 @@ class MeetingsController < ApplicationController
     end
 
     def meeting_params
-      params.require(:meeting).permit(:team_id, :room_id, :name, :start, :end)
+      params.require(:meeting).permit(:team_id, :room_id, :name, :start_time, :end_time)
     end
 end
