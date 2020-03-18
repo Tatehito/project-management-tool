@@ -3,7 +3,7 @@
 <h1>ミーティング編集</h1>
 
 <h2>概要</h2>
-<%= form_with(model: @meeting, local: true) do |form| %>
+<%= form_with(model: @meeting, url: team_meeting_path, local: true) do |form| %>
   <div class="field">
     <%= form.label :team_id %>
     <%= form.hidden_field :team_id, value: @meeting.team.id %>
@@ -37,7 +37,7 @@
   </div>
 
   <% if current_user.organizer?(@meeting) %>
-    <%= button_to 'このミーティングを中止する', @meeting, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <%= button_to 'このミーティングを中止する', team_meeting_path, method: :delete, data: { confirm: '中止してよろしいですか？' } %>
   <% end %>
 <% end %>
 

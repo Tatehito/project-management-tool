@@ -44,7 +44,7 @@
     <tbody>
         <% @team.meetings.each do |meeting| %>
           <tr>
-            <td><%= link_to meeting.name, edit_meeting_path(meeting) %></td>
+            <td><%= link_to meeting.name, edit_team_meeting_path(@team, meeting) %></td>
             <td><%= meeting.start %></td>
             <td><%= meeting.end %></td>
           </tr>

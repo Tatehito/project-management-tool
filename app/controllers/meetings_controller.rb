@@ -16,7 +16,7 @@ class MeetingsController < ApplicationController
     @meeting = Meeting.new(meeting_params)
     @meeting.meeting_members << MeetingMember.new(member_id: @meeting.team.leader.id, meeting_id: @meeting.id, organizer: true)
     if @meeting.save
-      redirect_to edit_meeting_path(@meeting), notice: 'Meeting was successfully created.'
+      redirect_to edit_team_meeting_path(id: @meeting.id), notice: 'ミーティングを追加しました。'
     else
       render :new
     end
@@ -47,7 +47,7 @@ class MeetingsController < ApplicationController
   def change_organizer
     @meeting.meeting_members = @meeting.update_organizer(params[:id])
     if @meeting.update(meeting_params)
-      redirect_to edit_meeting_path, notice: '幹事を変更しました。'
+      redirect_to edit_team_meeting_path, notice: '幹事を変更しました。'
     else
       render :edit
     end

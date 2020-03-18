@@ -34,7 +34,7 @@
     <tbody>
       <% @member.meetings.each do |m| %>
         <tr>
-          <td><%= link_to m.name, edit_meeting_path(m) %></td>
+          <td><%= link_to m.name, edit_team_meeting_path(m.team, m) %></td>
           <td><%= m.team.name %></td>
           <td><%= m.start %></td>
           <td><%= m.end %></td>
