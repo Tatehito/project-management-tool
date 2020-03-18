@@ -35,13 +35,13 @@
   <div class="actions">
     <%= form.submit '変更する'%>
   </div>
-
-  <% if current_user.organizer?(@meeting) %>
-    <%= button_to 'このミーティングを中止する', team_meeting_path, method: :delete, data: { confirm: '中止してよろしいですか？' } %>
-  <% end %>
 <% end %>
 
-  <br>
+<% if current_user.organizer?(@meeting) %>
+  <%= button_to 'このミーティングを中止する', team_meeting_path, method: :delete, data: { confirm: '中止してよろしいですか？' } %>
+<% end %>
+
+<br>
 
 <h2>参加メンバー</h2>
   <% if @meeting.members.size > 0 %>

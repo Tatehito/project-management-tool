@@ -22,6 +22,15 @@ class MeetingsController < ApplicationController
     end
   end
 
+  # ミーティング編集
+  def update
+    if @meeting.update(meeting_params)
+      redirect_to edit_team_meeting_path, notice: 'ミーティングを編集しました。'
+    else 
+      redirect_to edit_team_meeting_path, notice: 'ミーティングの編集に失敗しました。'
+    end
+  end
+
   # ミーティングキャンセル
   def destroy
     @meeting.destroy
