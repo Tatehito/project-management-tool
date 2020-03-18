@@ -3,8 +3,7 @@ class MeetingsController < ApplicationController
 
   # ミーティング追加画面表示
   def new
-    @meeting = Meeting.new
-    @meeting.team = Team.find(params[:id])
+    @meeting = Meeting.new(team_id: params[:team_id])
   end
 
   # ミーティング参照/編集画面表示
