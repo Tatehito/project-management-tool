@@ -1,25 +1,23 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Team</h1>
+<h1>チーム</h1>
 
-<br>
-
-<h2>TeamName</h2>
+<h2>チーム名</h2>
 <p><%= @team.name %></p>
 
 <br>
 
-<h2>Leader</h2>
-<p><%= @team.leader.name %></p>
-
-<br>
-
-<h2>Members</h2>
+<h2>チームメンバー</h2>
 <table>
+  <thead>
+    <th>Name</th>
+    <th>Leader</th>
+  </thead>
   <tbody>
     <% @team.members.each do |m| %>
       <tr>
         <td><%= m.name %></td>
+        <td><%= '○' if m.leader?(@team) %></td>
       </tr>
     <% end %>
   </tbody>
@@ -28,11 +26,12 @@
 <br>
 
 <% if @team.leader == current_user %>
-  <%= link_to 'Edit Team Member', "/team_members/#{@team.id}" %>
+  <%= link_to 'チームメンバー管理画面へ', members_team_path %>
+  <br>
   <br>
 <% end %>
 
-<h2>Meetings</h2>
+<h2>開催予定のミーティング</h2>
 <% if @team.meetings.size > 0 %>
   <table>
     <thead>
@@ -45,9 +44,9 @@
     <tbody>
         <% @team.meetings.each do |meeting| %>
           <tr>
-            <td><%= link_to meeting.name, edit_meeting_path(meeting) %></td>
-            <td><%= meeting.start %></td>
-            <td><%= meeting.end %></td>
+            <td><%= link_to meeting.name, edit_team_meeting_path(@team, meeting) %></td>
+            <td><%= meeting.start_time %></td>
+            <td><%= meeting.end_time %></td>
           </tr>
         <% end %>
     </tbody>
@@ -58,10 +57,10 @@
 
 <br>
 
-<td><%= link_to 'New Team Meeting', "/meetings/new/#{@team.id}" %></td>
+<td><%= link_to 'ミーティングを開催する', new_team_meeting_path(@team.id) %></td>
 
 <br>
 <br>
 <hr>
 
-<%= link_to 'Back', current_user %>
+<%= link_to '戻る', current_user %>

@@ -1,8 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Member Edit</h1>
-
-<br>
+<h1>メンバー管理</h1>
 
 <table>
   <thead>
@@ -18,16 +16,19 @@
       <tr>
         <td><%= member.name %></td>
         <td><%= member.owner %></td>
-        <td><%= link_to 'Edit', edit_member_path(member) %></td>
-        <td><%= link_to 'Destroy', member, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to '編集', edit_member_path(member) %></td>
+        <td><%= link_to '削除', member, method: :delete, data: { confirm: 'メンバーを削除してよろしいですか？' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to 'New Member', new_member_path %>
+<br>
 
+<%= link_to '新しいメンバーを追加する', new_member_path %>
+
+<br>
 <br>
 <hr>
 
-<%= link_to 'Back', current_user %>
+<p><%= link_to '戻る', current_user %></p>

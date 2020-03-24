@@ -1,39 +1,42 @@
 class TeamsController < ApplicationController
-  before_action :set_team, only: [:show, :edit, :update, :destroy]
+  before_action :set_team, only: [:show, :edit, :update, :destroy, :members, :add_member, :destroy_member]
 
-  # GET /teams
-  # GET /teams.json
+  # チーム一覧画面表示
   def index
     @teams = Team.all
   end
 
-  # GET /teams/1
-  # GET /teams/1.json
+  # チームトップ画面表示
   def show
   end
 
-  # GET /teams/new
+  # チーム追加画面表示
   def new
     @team = Team.new
     @team.team_members.build
   end
 
-  # GET /teams/1/edit
+  # チーム編集画面表示
   def edit
   end
 
-  # POST /teams
-  # POST /teams.json
+  # チームメンバー管理画面表示
+  def members
+    @new_member = @team.team_members.build
+  end
+
+  # チーム追加
   def create
     @team = Team.new(team_params)
     @team.team_members.first.leader = true;
     if @team.save
-      redirect_to teams_path, notice: 'Team was successfully created.'
+      redirect_to teams_path, notice: 'チームを作成しました。'
     else
       render :new
     end
   end
 
+  # チーム名・リーダー変更
   def update
     new_leader_id = params[:team][:leader_id]
     @team.name = params[:team][:name]
@@ -43,20 +46,31 @@ class TeamsController < ApplicationController
     end
     
     if @team.save
-      redirect_to teams_path, notice: 'Team was successfully updated.'
+      redirect_to teams_path, notice: 'チームを更新しました。'
     else
       render :edit
     end
   end
 
-  # DELETE /teams/1
-  # DELETE /teams/1.json
+  # チーム削除
   def destroy
     @team.destroy
-    respond_to do |format|
-      format.html { redirect_to teams_url, notice: 'Team was successfully destroyed.' }
-      format.json { head :no_content }
+    redirect_to teams_url, notice: 'チームを削除しました。'
+  end
+
+  # チームメンバー追加
+  def add_member
+    @team.team_members << TeamMember.new(member_id: params[:member_id])
+    if @team.save
+      redirect_to members_team_path, notice: 'メンバーを追加しました。'
     end
+  end
+
+  # チームメンバー削除
+  def destroy_member
+    @team_member = @team.team_members.find_by(member_id: params[:member_id])
+    @team_member.destroy
+    redirect_to members_team_path, notice: 'メンバーを削除しました。'
   end
 
   private
@@ -64,7 +78,6 @@ class TeamsController < ApplicationController
       @team = Team.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def team_params
       params.require(:team).permit(:name, team_members_attributes: [:id, :member_id, :team_id, :leader])
     end

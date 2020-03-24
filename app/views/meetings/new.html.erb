@@ -1,6 +1,6 @@
-<h1>New Meeting</h1>
+<h1>ミーティング開催</h1>
 
-<%= form_with(model: @meeting, local: true) do |form| %>
+<%= form_with(model: @meeting, url: team_meetings_path, local: true) do |form| %>
   <% if @meeting.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@meeting.errors.count, "error") %> prohibited this meeting from being saved:</h2>
@@ -31,17 +31,22 @@
 
   <div class="field">
     <%= form.label :start %>
-    <%= form.datetime_select :start %>
+    <%= form.datetime_select :start_time %>
   </div>
 
   <div class="field">
     <%= form.label :end %>
-    <%= form.datetime_select :end %>
+    <%= form.datetime_select :end_time %>
   </div>
+
+  <br>
 
   <div class="actions">
     <%= form.submit %>
   </div>
 <% end %>
 
-<%= link_to 'Back', @meeting.team %>
+<br>
+<hr>
+
+<%= link_to '戻る', @meeting.team %>

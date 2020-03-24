@@ -1,64 +1,50 @@
 class RoomsController < ApplicationController
   before_action :set_room, only: [:show, :edit, :update, :destroy]
 
-  # GET /rooms
-  # GET /rooms.json
+  # 会議室管理画面表示
   def index
     @rooms = Room.all
   end
 
-  # GET /rooms/1
-  # GET /rooms/1.json
-  def show
-  end
-
-  # GET /rooms/new
+  # 会議室追加画面表示
   def new
     @room = Room.new
   end
 
-  # GET /rooms/1/edit
+  # 会議室編集画面表示
   def edit
   end
 
-  # POST /rooms
-  # POST /rooms.json
+  # 会議室追加
   def create
     @room = Room.new(room_params)
     if @room.save
-      redirect_to rooms_path, notice: 'Room was successfully created.'
+      redirect_to rooms_path, notice: '会議室を作成しました。'
     else
       render :new
     end
   end
 
-  # PATCH/PUT /rooms/1
-  # PATCH/PUT /rooms/1.json
+  # 会議室編集
   def update
     if @room.update(room_params)
-      redirect_to rooms_path, notice: 'Room was successfully updated.'
+      redirect_to rooms_path, notice: '会議室を更新しました。'
     else
       render :edit
     end
   end
 
-  # DELETE /rooms/1
-  # DELETE /rooms/1.json
+  # 会議室廃止
   def destroy
     @room.destroy
-    respond_to do |format|
-      format.html { redirect_to rooms_url, notice: 'Room was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to rooms_url, notice: '会議室を廃止しました。'
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_room
       @room = Room.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def room_params
       params.require(:room).permit(:name, :capacity)
     end

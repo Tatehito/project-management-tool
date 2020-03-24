@@ -5,13 +5,24 @@ class Meeting < ApplicationRecord
   has_many :meeting_members, dependent: :destroy
   has_many :members,   through: :meeting_members
 
-  validate :check_capacity
+  validate :date_reversal
+  validate :reserved
 
-    def check_capacity
-      if members.size > room.capacity
-        errors.add(:capacity, "会議室「#{room.name}」の定員オーバーです.")
+  def date_reversal
+    if start_time > end_time
+      errors.add(:base, '開始時間と終了時間が逆転しています。')
+    end
+  end
+
+  def reserved
+    room.meetings.each do |m|
+      if (start_time <= m.start_time && end_time >= m.start_time) ||
+         (start_time >= m.start_time && start_time <= m.end_time)
+        errors.add(:base, "会議室「#{room.name}」は予約済みです。時間を変更してください。")
+        break
       end
     end
+  end
 
   def organizer
     meeting_members.each do |m|

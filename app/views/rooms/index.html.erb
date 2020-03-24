@@ -1,6 +1,10 @@
 <p id="notice"><%= notice %></p>
 
+<<<<<<< HEAD
 <h1>Edit Rooms</h1>
+=======
+<h1>会議室管理</h1>
+>>>>>>> temp-branch
 
 <table>
   <thead>
@@ -16,8 +20,8 @@
       <tr>
         <td><%= room.name %></td>
         <td><%= room.capacity %></td>
-        <td><%= link_to 'Edit', edit_room_path(room) %></td>
-        <td><%= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to '編集', edit_room_path(room) %></td>
+        <td><%= link_to '削除', room, method: :delete, data: { confirm: '会議室を廃止しますか？' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -25,8 +29,8 @@
 
 <br>
 
-<%= link_to 'New Room', new_room_path %>
+<%= link_to '新しい会議室をつくる', new_room_path %>
 
 <hr>
 
-<%= link_to 'Back', current_user %>
+<%= link_to '戻る', current_user %>

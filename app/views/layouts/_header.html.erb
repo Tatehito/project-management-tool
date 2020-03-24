@@ -1,3 +1,4 @@
 <% if logged_in? %>
-  <p>「<%= current_user.name %>」でログイン中  <%= link_to 'Logout', root_path %><p>
+  <p>「<%= current_user.name %>」でログイン中<p>
+  <p><%= link_to 'ログアウト', root_path %></p>
 <% end %>

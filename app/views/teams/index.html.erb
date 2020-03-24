@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Teams</h1>
+<h1>チーム管理</h1>
 
 <table>
   <thead>
@@ -16,8 +16,8 @@
       <tr>
         <td><%= team.name %></td>
         <td><%= team.leader.name %></td>
-        <td><%= link_to 'Edit', edit_team_path(team) %></td>
-        <td><%= link_to 'Destroy', team, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to '編集', edit_team_path(team) %></td>
+        <td><%= link_to '削除', team, method: :delete, data: { confirm: 'チームを削除してよろしいですか?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -25,8 +25,8 @@
 
 <br>
 
-<%= link_to 'New Team', new_team_path %>
+<%= link_to '新しいチームをつくる', new_team_path %>
 
 <hr>
 
-<%= link_to 'Back', current_user %>
+<%= link_to '戻る', current_user %>

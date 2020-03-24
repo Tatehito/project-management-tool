@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<h1>チームメンバー管理</h1>
+
+<h2>チーム名</h2>
+<p><%= @team.name %></p>
+
+<h2>チームメンバー</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Leader</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @team.members.each do |m| %>
+      <tr>
+        <td><%= m.name %></td>
+        <td><%= '○' if m.leader?(@team) %></td>
+        <td><%= button_to 'チームから外す', member_team_path(member_id: m.id), method: :delete unless m.leader?(@team) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= form_with url: member_team_path do |form| %>
+  <%= form.collection_select :member_id, @team.outside_members, :id, :name, {:include_blank => true} %>
+  <%= form.submit 'チームメンバーを追加する' %>
+<% end %>
+
+<br>
+<hr>
+
+<%= link_to '戻る', @team %>
