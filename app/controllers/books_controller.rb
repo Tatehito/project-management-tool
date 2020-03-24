@@ -8,6 +8,7 @@ class BooksController < ApplicationController
 
   # 書籍追加画面表示
   def new
+    @book = Book.new
   end
 
   # 書籍編集画面表示
@@ -16,6 +17,12 @@ class BooksController < ApplicationController
 
   # 書籍追加
   def create
+    @book = Book.new(book_params)
+    if @book.save
+      redirect_to books_path, notice: '書籍を追加しました。' 
+    else
+      render :new
+    end
   end
 
   # 書籍編集
