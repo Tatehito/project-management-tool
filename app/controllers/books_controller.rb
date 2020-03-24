@@ -27,6 +27,11 @@ class BooksController < ApplicationController
 
   # 書籍編集
   def update
+    if @book.update(book_params)
+      redirect_to books_path, notice: '書籍情報を更新しました。' 
+    else
+      render :edit
+    end
   end
 
   # 書籍削除
