@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<h1>書籍管理</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @books.each do |b| %>
+      <tr>
+        <td><%= b.name %></td>
+        <td><%= link_to '編集', edit_book_path(b) %></td>
+        <td><%= link_to '削除', b, method: :delete, data: { confirm: '書籍を削除してよろしいですか？' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to '新しい書籍を追加する', new_book_path %>
+
+<br>
+<br>
+<hr>
+
+<p><%= link_to '戻る', current_user %></p>
