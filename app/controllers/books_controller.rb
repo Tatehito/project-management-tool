@@ -35,7 +35,9 @@ class BooksController < ApplicationController
   end
 
   # 書籍削除
-  def delete
+  def destroy
+    @book.destroy
+    redirect_to books_path, notice: '書籍を削除しました。' 
   end
 
   private
