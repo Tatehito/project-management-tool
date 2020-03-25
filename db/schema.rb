@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_24_033515) do
+ActiveRecord::Schema.define(version: 2020_03_25_045512) do
 
   create_table "books", force: :cascade do |t|
     t.string "name"
@@ -47,6 +47,18 @@ ActiveRecord::Schema.define(version: 2020_03_24_033515) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "rental_books", force: :cascade do |t|
+    t.integer "member_id", null: false
+    t.integer "book_id", null: false
+    t.date "checkout_date"
+    t.date "return_date"
+    t.integer "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["book_id"], name: "index_rental_books_on_book_id"
+    t.index ["member_id"], name: "index_rental_books_on_member_id"
+  end
+
   create_table "rooms", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -74,6 +86,8 @@ ActiveRecord::Schema.define(version: 2020_03_24_033515) do
   add_foreign_key "meeting_members", "members"
   add_foreign_key "meetings", "rooms"
   add_foreign_key "meetings", "teams"
+  add_foreign_key "rental_books", "books"
+  add_foreign_key "rental_books", "members"
   add_foreign_key "team_members", "members"
   add_foreign_key "team_members", "teams"
 end
