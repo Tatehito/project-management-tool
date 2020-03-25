@@ -56,7 +56,7 @@ class BooksController < ApplicationController
       checkout_date: checkout_date,
       return_date: return_date)
     if @book.save
-      redirect_to rental_books_path, notice: "書籍をレンタルしました。返却日は#{ return_date }です。"
+      redirect_to current_user, notice: "書籍をレンタルしました。返却日は#{ return_date }です。"
     end
   end
 

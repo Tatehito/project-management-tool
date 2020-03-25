@@ -2,6 +2,12 @@
 
 <h1>書籍レンタル</h1>
 
+<% if current_user.books.present? %>
+  <p style="color:red;">※ 新しくレンタルするには、レンタル中の書籍を返却してください。</p>
+<% end%>
+
+<br>
+
 <h2>レンタル可能な書籍一覧</h2>
 <table>
   <thead>
@@ -15,7 +21,9 @@
     <% @books.each do |book| %>
       <tr>
         <td><%= book.name %></td>
-        <td><%= button_to '借りる', rental_book_path(book) %></td>
+        <% if current_user.books.blank? %>
+          <td><%= button_to '借りる', rental_book_path(book) %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
