@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
-  before_action :set_book, only: [:edit, :update, :destroy]
+  require 'date'
+  before_action :set_book, only: [:edit, :update, :destroy, :rental_book]
 
   # 書籍管理画面表示
   def index
@@ -43,6 +44,21 @@ class BooksController < ApplicationController
   def destroy
     @book.destroy
     redirect_to books_path, notice: '書籍を削除しました。' 
+  end
+
+  # 書籍レンタル
+  def rental_book
+    checkout_date = Date.today
+    return_date = checkout_date + 7
+
+    @book.rental_books.new(
+      member_id: current_user.id,
+      checkout_date: checkout_date,
+      return_date: return_date,
+      status: :close)
+    if @book.save
+      redirect_to rental_books_path, notice: "書籍をレンタルしました。返却日は#{return_date}です。"
+    end
   end
 
   private

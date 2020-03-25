@@ -12,9 +12,10 @@
   </thead>
 
   <tbody>
-    <% @books.each do |b| %>
+    <% @books.each do |book| %>
       <tr>
-        <td><%= b.name %></td>
+        <td><%= book.name %></td>
+        <td><%= button_to '借りる', rental_book_path(book) %></td>
       </tr>
     <% end %>
   </tbody>

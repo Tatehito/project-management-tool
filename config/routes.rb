@@ -20,5 +20,8 @@ Rails.application.routes.draw do
     collection do
       get :rental
     end
+    member do
+      post :rental, to: 'books#rental_book'
+    end
   end
 end
