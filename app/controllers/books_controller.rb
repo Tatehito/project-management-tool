@@ -54,8 +54,7 @@ class BooksController < ApplicationController
     @book.rental_books.new(
       member_id: current_user.id,
       checkout_date: checkout_date,
-      return_date: return_date,
-      status: :close)
+      return_date: return_date)
     if @book.save
       redirect_to rental_books_path, notice: "書籍をレンタルしました。返却日は#{ return_date }です。"
     end

@@ -9,11 +9,6 @@ class Book < ApplicationRecord
   end
 
   def rentable?
-    rental_books.each do |r|
-      if r.close?
-        return false
-      end
-    end
-    true
+    rental_books.blank?
   end
 end
