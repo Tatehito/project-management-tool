@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
   require 'date'
-  before_action :set_book, only: [:edit, :update, :destroy, :rental_book]
+  before_action :set_book, only: [:edit, :update, :destroy, :rental_book, :return]
 
   # 書籍管理画面表示
   def index
@@ -59,6 +59,12 @@ class BooksController < ApplicationController
     if @book.save
       redirect_to rental_books_path, notice: "書籍をレンタルしました。返却日は#{ return_date }です。"
     end
+  end
+
+  # 書籍返却
+  def return
+    @book.rental_books.find_by(member_id: current_user.id).destroy
+    redirect_to current_user, notice: "書籍を返却しました。"
   end
 
   private

@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     end
     member do
       post :rental, to: 'books#rental_book'
+      delete :return
     end
   end
 end
