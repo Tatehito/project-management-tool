@@ -10,7 +10,7 @@ class Book < ApplicationRecord
 
   def rentable?
     rental_books.each do |r|
-      if r.status == :close
+      if r.close?
         return false
       end
     end
