@@ -15,6 +15,11 @@ class BooksController < ApplicationController
   def edit
   end
 
+  # 書籍レンタル画面表示
+  def rental
+    @books = Book.rentable_books
+  end
+
   # 書籍追加
   def create
     @book = Book.new(book_params)

@@ -16,5 +16,9 @@ Rails.application.routes.draw do
     end
   end
   resources :rooms
-  resources :books
+  resources :books do
+    collection do
+      get :rental
+    end
+  end
 end
