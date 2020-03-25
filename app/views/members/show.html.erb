@@ -49,6 +49,15 @@
 <br>
 
 <h2>レンタル中の書籍</h2>
+<table>
+  <tbody>
+    <% @member.books_on_rental.each do |book| %>
+      <tr>
+        <td><%= book.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <%= link_to '書籍をレンタルする', rental_books_path %>
 
